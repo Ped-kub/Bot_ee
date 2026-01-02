@@ -1,10 +1,20 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const cron = require('node-cron');
+const express = require('express');
 
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds],
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bot is running!'); 
 });
+
+app.listen(port, () => {
+  console.log(`Web server listening on port ${port}`);
+});
+
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const CHANNEL_ID = '1375761892005384213'; 
 const OPEN_HOUR = 7;    
